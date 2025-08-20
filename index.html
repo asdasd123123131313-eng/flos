@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloth Trading Simulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 20px;
+    }
+    .container {
+      margin: 30px auto;
+      max-width: 600px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .deposit { background: #27ae60; color: white; }
+    .withdraw { background: #c0392b; color: white; }
+    .trade { background: #2980b9; color: white; }
+    .balance {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Cloth Trading Simulator</h1>
+    <p>Practice trading and managing your balance – 100% Free!</p>
+  </header>
+
+  <div class="container">
+    <h2>Your Virtual Wallet</h2>
+    <div class="balance">Balance: $<span id="balance">100</span></div>
+
+    <button class="deposit" onclick="deposit()">Deposit +$50</button>
+    <button class="withdraw" onclick="withdraw()">Withdraw -$50</button>
+    <button class="trade" onclick="trade()">Trade Cloth</button>
+
+    <p id="message"></p>
+  </div>
+
+  <script>
+    let balance = 100;
+
+    function updateBalance() {
+      document.getElementById("balance").innerText = balance;
+    }
+
+    function deposit() {
+      balance += 50;
+      updateBalance();
+      document.getElementById("message").innerText = "You deposited $50!";
+    }
+
+    function withdraw() {
+      if (balance >= 50) {
+        balance -= 50;
+        updateBalance();
+        document.getElementById("message").innerText = "You withdrew $50!";
+      } else {
+        document.getElementById("message").innerText = "Not enough balance!";
+      }
+    }
+
+    function trade() {
+      let profit = Math.floor(Math.random() * 100) - 50; // -50 to +50
+      balance += profit;
+      updateBalance();
+      if (profit >= 0) {
+        document.getElementById("message").innerText = "You traded clothes and earned $" + profit + "!";
+      } else {
+        document.getElementById("message").innerText = "Oops! You lost $" + Math.abs(profit) + " in trading.";
+      }
+    }
+  </script>
+</body>
+</html>
